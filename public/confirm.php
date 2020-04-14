@@ -99,12 +99,23 @@
 
 							$queryLogin = mysqli_query($db, $sqlLogin);
 
+							$queryRole = mysqli_query($db, $sqlLogin);
+							$resultRole = mysqli_fetch_assoc($queryRole);
+
 							if(mysqli_num_rows($queryLogin) > 0)
 							{
 								$_SESSION["loginID"] = 1;
 								$_SESSION["klant"] = $emailLogin;
+
 								echo "<p>You were succesfully signed in!</p>";
-								header("refresh:2;url=profile.php");
+								if($resultRole["rol"] != "admin")
+								{
+									header("refresh:2;url=profile.php");
+								}
+								else if($resultRole["rol"] == "admin")
+								{
+									header("refresh:2;url=admin.php");
+								}
 							}
 						}
 						else
