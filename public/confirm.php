@@ -35,6 +35,12 @@
 							<?php
 						}	
 						?>
+					<?php if(isset($_SESSION["klant"])) 
+						{	?>
+							<li><a href="logout.php">Log out</a></li>
+							<?php
+						}
+					?>
 				</ul>
 			</nav>
 
@@ -123,8 +129,8 @@
 							$postalProfile = $_POST["postalProfile"];
 							$cityProfile = $_POST["cityProfile"];
 
-							$sqlEdit = "UPDATE gebruikers (voornaam, tussenvoegsel, achternaam, email, wachtwoord, telefoonNMR, straatnaam, huisNMR, postcode, woonplaats)
-							VALUES ('{$firstNameProfile}', '{$infixProfile}', '{$lastNameProfile}', '{$emailProfile}', '{$passwordProfile}', '+31 {$phoneNMRProfile}', '{$streetProfile}', '{$houseNMRProfile}', '{$postalProfile}', '{$cityProfile')";
+							$sqlEdit = "UPDATE gebruikers SET voornaam = '$firstNameProfile', tussenvoegsel = '$infixProfile', achternaam = '$lastNameProfile', email = '$emailProfile',
+										telefoonNMR = '+31 $phoneNMRProfile', wachtwoord = '$passwordProfile', straatnaam = '$streetProfile', huisNMR = '$houseNMRProfile', postcode = '$postalProfile', woonplaats = '$cityProfile'";
 
 							$queryEdit = mysqli_query($db, $sqlEdit);
 							

@@ -34,6 +34,12 @@
 							<?php
 						}	
 						?>
+					<?php if(isset($_SESSION["klant"])) 
+						{	?>
+							<li><a href="logout.php">Log out</a></li>
+							<?php
+						}
+					?>
 				</ul>
 			</nav>
 
