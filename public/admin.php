@@ -1,5 +1,15 @@
 <?php require("../private/initialize.php"); ?>
 
+<?php
+	$user = $_SESSION["klant"];
+
+	$sqlRole = "SELECT * FROM gebruikers WHERE email = '{$user}'";
+	$queryRole = mysqli_query($db, $sqlRole);
+	$resultRole = mysqli_fetch_assoc($queryRole);
+
+	if($resultRole["rol"] == "admin")
+	{
+	?>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -14,7 +24,7 @@
 
 		<!-- Header -->
 			<header id="header">
-				<a class="logo" href="admin.php">Musival (Admin)</a>
+				<a class="logo" href="admin.php">Admin - Users</a>
 				<nav>
 					<a href="#menu">Menu</a>
 				</nav>
@@ -23,7 +33,8 @@
 		<!-- Nav -->
 			<nav id="menu">
 				<ul class="links">
-					<li><a href="admin.php">Home</a></li>
+					<li><a href="admin.php">Users</a></li>
+					<li><a href="adminOrders.php">Orders</a></li>
 					<?php if(isset($_SESSION["klant"])) 
 						{	?>
 							<li><a href="logout.php">Log out</a></li>
@@ -52,28 +63,25 @@
 								<th>Role</th>
 							</tr>
 							<?php
-								$user = $_SESSION["klant"];
+								$sql = "SELECT * FROM gebruikers";
+								$query = mysqli_query($db, $sql);
 
-								$sqlRole = "SELECT * FROM gebruikers WHERE email = '{$user}'";
-								$queryRole = mysqli_query($db, $sqlRole);
-								$resultRole = mysqli_fetch_assoc($queryRole);
-
-								if($resultRole["rol"] == "admin")
+								while($result = mysqli_fetch_assoc($query))
 								{
-									$sqlUsers = "SELECT * FROM gebruikers";
-									$queryUsers = mysqli_query($db, $sqlUsers);
-
-									while($resultUsers = mysqli_fetch_assoc($queryUsers))
-									{
-										echo "
-										<tr>
-											<td></td>
-										</tr>";
-									}
-								}
-								else
-								{
-									echo "You don't have the permision to view this page";
+									echo "
+									<tr>
+										<td>{$result['gebruikerID']}</td>
+										<td>{$result['voornaam']}</td>
+										<td>{$result['tussenvoegsel']}</td>
+										<td>{$result['achternaam']}</td>
+										<td>{$result['email']}</td>
+										<td>{$result['telefoonNMR']}</td>
+										<td>{$result['straatnaam']}</td>
+										<td>{$result['huisNMR']}</td>
+										<td>{$result['postcode']}</td>
+										<td>{$result['woonplaats']}</td>
+										<td>{$result['rol']}</td>
+									</tr>";
 								}
 							?>
 						</table>
@@ -90,3 +98,10 @@
 
 	</body>
 </html>
+<?php
+	}
+	else
+	{
+		echo "You don't have the permision to view this page";
+	}
+?>
