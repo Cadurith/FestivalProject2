@@ -1,7 +1,5 @@
 <?php require("../private/initialize.php"); ?>
 
-<<<<<<< HEAD
-=======
 <?php
 	$user = $_SESSION["klant"];
 
@@ -12,7 +10,6 @@
 	if($resultRole["rol"] == "admin")
 	{
 	?>
->>>>>>> admin_page
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -27,11 +24,7 @@
 
 		<!-- Header -->
 			<header id="header">
-<<<<<<< HEAD
-				<a class="logo" href="admin.php">Musival (Admin)</a>
-=======
 				<a class="logo" href="admin.php">Admin - Users</a>
->>>>>>> admin_page
 				<nav>
 					<a href="#menu">Menu</a>
 				</nav>
@@ -40,12 +33,8 @@
 		<!-- Nav -->
 			<nav id="menu">
 				<ul class="links">
-<<<<<<< HEAD
-					<li><a href="admin.php">Home</a></li>
-=======
 					<li><a href="admin.php">Users</a></li>
 					<li><a href="adminOrders.php">Orders</a></li>
->>>>>>> admin_page
 					<?php if(isset($_SESSION["klant"])) 
 						{	?>
 							<li><a href="logout.php">Log out</a></li>
@@ -74,30 +63,6 @@
 								<th>Role</th>
 							</tr>
 							<?php
-<<<<<<< HEAD
-								$user = $_SESSION["klant"];
-
-								$sqlRole = "SELECT * FROM gebruikers WHERE email = '{$user}'";
-								$queryRole = mysqli_query($db, $sqlRole);
-								$resultRole = mysqli_fetch_assoc($queryRole);
-
-								if($resultRole["rol"] == "admin")
-								{
-									$sqlUsers = "SELECT * FROM gebruikers";
-									$queryUsers = mysqli_query($db, $sqlUsers);
-
-									while($resultUsers = mysqli_fetch_assoc($queryUsers))
-									{
-										echo "
-										<tr>
-											<td></td>
-										</tr>";
-									}
-								}
-								else
-								{
-									echo "You don't have the permision to view this page";
-=======
 								$sql = "SELECT * FROM gebruikers";
 								$query = mysqli_query($db, $sql);
 
@@ -117,7 +82,6 @@
 										<td>{$result['woonplaats']}</td>
 										<td>{$result['rol']}</td>
 									</tr>";
->>>>>>> admin_page
 								}
 							?>
 						</table>
@@ -133,9 +97,6 @@
 			<script src="../private/assets/js/main.js"></script>
 
 	</body>
-<<<<<<< HEAD
-</html>
-=======
 </html>
 <?php
 	}
@@ -144,4 +105,3 @@
 		echo "You don't have the permision to view this page";
 	}
 ?>
->>>>>>> admin_page
